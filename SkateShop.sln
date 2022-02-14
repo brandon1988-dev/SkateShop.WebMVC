@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.32126.315
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkateShop.WebMVC", "SkateShop\SkateShop.WebMVC.csproj", "{354477C0-1BE0-4233-8CC4-7394AB9402E3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkateShop.Web.MVC", "SkateShop\SkateShop.Web.MVC.csproj", "{354477C0-1BE0-4233-8CC4-7394AB9402E3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkateShop.Data", "SkateShop.Data\SkateShop.Data.csproj", "{F4B09275-A639-4552-B4B8-99226CEE4295}"
 EndProject

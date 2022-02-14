@@ -29,5 +29,14 @@ namespace SkateShop.Data
         {
             return new ApplicationDbContext();
         }
+
+        public DbSet<SkateShop.Web.MVC.Product> Products { get; set; }
+        public DbSet<SkateShop.Web.MVC.Models.Customer> Customers { get; set; }
+
+        public DbSet<SkateShop.Web.MVC.Models.Transaction> Transactions { get; set; }
+        public DbSet<SkateShop.Web.MVC.Product> Products { get; set; }
+
+        public DbSet<SkateShop.Web.MVC.Favorite> Favorites { get; set; }
+        public DbSet<SkateShop.Web.MVC.PaymentMethod> PaymentMethods { get; set; }
     }
 }
