@@ -1,4 +1,6 @@
 ﻿using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration;
+using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -25,18 +27,61 @@ namespace SkateShop.Data
         {
         }
 
+        public class IdentityUserLoginConfiguration : EntityTypeConfiguration<IdentityUserLogin>
+        {
+            public IdentityUserLoginConfiguration()
+            {
+                HasKey(iul => iul.UserId);
+            }
+        }
+
+        public class IdentityUserRoleConfiguration : EntityTypeConfiguration<IdentityUserRole>
+        {
+            public IdentityUserRoleConfiguration()
+            {
+                HasKey(iur => iur.UserId);
+            }
+        }
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
         }
 
-        public DbSet<SkateShop.Web.MVC.Product> Products { get; set; }
-        public DbSet<SkateShop.Web.MVC.Models.Customer> Customers { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Customer> Customers { get; set; }
 
-        public DbSet<SkateShop.Web.MVC.Models.Transaction> Transactions { get; set; }
-        public DbSet<SkateShop.Web.MVC.Product> Products { get; set; }
+        public DbSet<Transaction> Transactions { get; set; }
 
-        public DbSet<SkateShop.Web.MVC.Favorite> Favorites { get; set; }
-        public DbSet<SkateShop.Web.MVC.PaymentMethod> PaymentMethods { get; set; }
+        public DbSet<Favorite> Favorites { get; set; }
+        public DbSet<PaymentMethod> PaymentMethods { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder
+                .Conventions
+                .Remove<PluralizingTableNameConvention>();
+
+            modelBuilder
+                .Configurations
+                .Add(new IdentityUserLoginConfiguration())
+                .Add(new IdentityUserRoleConfiguration());
+        }
+    }
+
+    public class IdentityUserLoginConfiguration : EntityTypeConfiguration<IdentityUserLogin>
+    {
+        public IdentityUserLoginConfiguration()
+        {
+            HasKey(iul => iul.UserId);
+        }
+    }
+
+    public class IdentityUserRoleConfiguration : EntityTypeConfiguration<IdentityUserRole>
+    {
+        public IdentityUserRoleConfiguration()
+        {
+            HasKey(iur => iur.UserId);
+        }
     }
 }
