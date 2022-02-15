@@ -10,9 +10,9 @@ namespace SkateShop.Data
 {
     public enum PaymentMethod
     {
-        Cash,
-        CreditCard,
-        PayPal
+        Cash = 1,
+        CreditCard = 2,
+        PayPal = 3
     }
 
     public class Payment
@@ -25,5 +25,7 @@ namespace SkateShop.Data
         public int TransactionID { get; set; }
 
         public PaymentMethod PaymentType { get; set; }
+
+        public double PaymentAmount { get; set; }
     }
 }
