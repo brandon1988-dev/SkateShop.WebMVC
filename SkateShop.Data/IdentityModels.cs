@@ -54,7 +54,7 @@ namespace SkateShop.Data
         public DbSet<Transaction> Transactions { get; set; }
 
         public DbSet<Favorite> Favorites { get; set; }
-        public DbSet<PaymentMethod> PaymentMethods { get; set; }
+        public DbSet<Payment> Payment { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

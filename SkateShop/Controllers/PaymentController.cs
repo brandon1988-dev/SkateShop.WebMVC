@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace SkateShop.Controllers
 {
-    public class PaymentMethodController : Controller
+    public class PaymentController : Controller
     {
         // GET: PaymentMethod
         public ActionResult Index()

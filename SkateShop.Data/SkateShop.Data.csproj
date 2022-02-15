@@ -57,6 +57,11 @@
     <Compile Include="Customer.cs" />
     <Compile Include="Favorite.cs" />
     <Compile Include="IdentityModels.cs" />
+    <Compile Include="Migrations\202202151948478_initialMigration.cs" />
+    <Compile Include="Migrations\202202151948478_initialMigration.Designer.cs">
+      <DependentUpon>202202151948478_initialMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Payment.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -65,6 +70,11 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202202151948478_initialMigration.resx">
+      <DependentUpon>202202151948478_initialMigration.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

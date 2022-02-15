@@ -21,7 +21,6 @@ namespace SkateShop.Data
         public string PaymentID { get; set; }
 
         [Required]
-        [ForeignKey(nameof(Transaction))]
         public int TransactionID { get; set; }
 
         public PaymentMethod PaymentType { get; set; }

@@ -18,7 +18,6 @@ namespace SkateShop.Controllers
         {
             List<Product> productList = _db.Products.ToList();
             List<Product> orderedList = productList.OrderBy(prod => prod.Name).ToList();
-            List < ProductListItem >
 
             return View(orderedList);
         }
