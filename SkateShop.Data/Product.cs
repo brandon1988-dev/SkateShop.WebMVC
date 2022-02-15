@@ -15,10 +15,9 @@ namespace SkateShop.Data
         [Required]
         public string Name { get; set; }
 
-        [Required]
-        public int AvailableItems { get; set; }
+        public int AvailableStock { get; set; }
 
         [Required]
-        public double Price { get; set; }
+        public decimal Price { get; set; }
     }
 }

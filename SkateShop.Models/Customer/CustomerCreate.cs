@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SkateShop.Data
+namespace SkateShop.Models.Customer
 {
-    public class PaymentMethod
+    class CustomerCreate
     {
     }
 }

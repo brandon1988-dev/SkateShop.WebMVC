@@ -54,17 +54,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Customer\Customer.cs" />
+    <Compile Include="Customer\CustomerCreate.cs" />
+    <Compile Include="Customer\CustomerDelete.cs" />
+    <Compile Include="Customer\CustomerDetail.cs" />
+    <Compile Include="Customer\CustomerEdit.cs" />
     <Compile Include="Product\ProductCreate.cs" />
     <Compile Include="Product\ProductDetail.cs" />
     <Compile Include="Product\ProductEdit.cs" />
     <Compile Include="Product\ProductListItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Transaction\TransactionCreate.cs" />
+    <Compile Include="Transaction\TransactionListItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\SkateShop.Data\SkateShop.Data.csproj">
+      <Project>{f4b09275-a639-4552-b4b8-99226cee4295}</Project>
+      <Name>SkateShop.Data</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
