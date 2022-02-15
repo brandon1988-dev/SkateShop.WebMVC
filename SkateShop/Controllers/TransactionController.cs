@@ -1,51 +1,32 @@
-﻿using SkateShop.Data;
-using SkateShop.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
 namespace SkateShop.Controllers
 {
-    public class ProductController : Controller
+    public class TransactionController : Controller
     {
-        private ApplicationDbContext _db = new ApplicationDbContext();
-
-        // GET: Product
+        // GET: Transaction
         public ActionResult Index()
         {
-            List<Product> productList = _db.Products.ToList();
-            List<Product> orderedList = productList.OrderBy(prod => prod.ProductID).ToList();
-            List < ProductListItem >
-
-            return View(orderedList);
+            return View();
         }
 
-        // GET: Product/Details/
-        public ActionResult Details(int? id)
+        // GET: Transaction/Details/5
+        public ActionResult Details(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Product product = _db.Products.Find(id);
-
-            if (product == null)
-            {
-                return HttpNotFound();
-            }
-            return View(product);
+            return View();
         }
 
-        // GET: Product/Create
+        // GET: Transaction/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Product/Create
+        // POST: Transaction/Create
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
@@ -61,13 +42,13 @@ namespace SkateShop.Controllers
             }
         }
 
-        // GET: Product/Edit/5
+        // GET: Transaction/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: Product/Edit/5
+        // POST: Transaction/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
@@ -83,13 +64,13 @@ namespace SkateShop.Controllers
             }
         }
 
-        // GET: Product/Delete/5
+        // GET: Transaction/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: Product/Delete/5
+        // POST: Transaction/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
