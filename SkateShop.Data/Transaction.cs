@@ -25,6 +25,9 @@ namespace SkateShop.Data
         public int ItemCount { get; set; }
 
         [Required]
+        public double PaymentAmount { get; set; }
+
+        [Required]
         public DateTime DateOfTransaction { get; set; }
 
         public virtual Customer Customer { get; set; }

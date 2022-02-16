@@ -55,15 +55,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Customer\CustomerCreate.cs" />
-    <Compile Include="Customer\CustomerDelete.cs" />
     <Compile Include="Customer\CustomerDetail.cs" />
     <Compile Include="Customer\CustomerEdit.cs" />
+    <Compile Include="Customer\CustomerListItem.cs" />
+    <Compile Include="Payment\PaymentCreate.cs" />
+    <Compile Include="Payment\PaymentDetail.cs" />
+    <Compile Include="Payment\PaymentItemList.cs" />
     <Compile Include="Product\ProductCreate.cs" />
     <Compile Include="Product\ProductDetail.cs" />
     <Compile Include="Product\ProductEdit.cs" />
     <Compile Include="Product\ProductListItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Transaction\TransactionCreate.cs" />
+    <Compile Include="Transaction\TransactionDetail.cs" />
+    <Compile Include="Transaction\TransactionEdit.cs" />
     <Compile Include="Transaction\TransactionListItem.cs" />
   </ItemGroup>
   <ItemGroup>

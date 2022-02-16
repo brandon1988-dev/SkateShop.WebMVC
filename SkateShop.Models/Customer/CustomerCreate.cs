@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SkateShop.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -7,12 +8,23 @@ using System.Threading.Tasks;
 
 namespace SkateShop.Models.Customer
 {
-    internal class CustomerCreate
+    public class CustomerCreate
     {
+        public int CustomerID { get; set; }
+
         [Required]
+        [MinLength(2, ErrorMessage = "Please enter at least 2 characters.")]
+        [MaxLength(20, ErrorMessage = "There are too many characters in this field.")]
+        [Display(Name = "First Name")]
         public string FirstName { get; set; }
 
         [Required]
+        [MinLength(2, ErrorMessage = "Please enter at least 2 characters.")]
+        [MaxLength(20, ErrorMessage = "There are too many characters in this field.")]
+        [Display(Name = "Last Name")]
         public string LastName { get; set; }
+
+        [Required]
+        public PaymentMethod PaymentType { get; set; }
     }
 }

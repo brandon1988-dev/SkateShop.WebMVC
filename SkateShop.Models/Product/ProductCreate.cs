@@ -9,9 +9,11 @@ namespace SkateShop.Models
 {
     public class ProductCreate
     {
+        public int ProductID { get; set; }
+
         [Required]
         [MinLength(2, ErrorMessage = "Please enter at least 2 characters.")]
-        [MaxLength(100, ErrorMessage = "There are too many characters in this field.")]
+        [MaxLength(50, ErrorMessage = "There are too many characters in this field.")]
         [Display(Name = "Product Name")]
         public string Name { get; set; }
 
@@ -22,8 +24,8 @@ namespace SkateShop.Models
         [Required]
         public decimal Price { get; set; }
 
-        [Required]
-        [Display(Name = "It is a complete")]
-        public bool IsComplete { get; set; }
+        /*[Required] // (Stretch Goal)
+          [Display(Name = "It is a complete")]
+          public bool IsComplete { get; set; }*/
     }
 }

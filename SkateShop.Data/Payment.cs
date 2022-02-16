@@ -11,8 +11,8 @@ namespace SkateShop.Data
     public enum PaymentMethod
     {
         Cash = 1,
-        CreditCard = 2,
-        PayPal = 3
+        Visa = 2, Mastercard = 3, Discover = 4, AmericanExpress = 5,
+        PayPal = 6
     }
 
     public class Payment
@@ -20,11 +20,16 @@ namespace SkateShop.Data
         [Key]
         public string PaymentID { get; set; }
 
-        [Required]
-        public int TransactionID { get; set; }
-
         public PaymentMethod PaymentType { get; set; }
 
-        public double PaymentAmount { get; set; }
+        public string BillingAddress { get; set; }
+    }
+
+    public class CreditCard : Payment
+    {
+        public string CardHolderName { get; set; }
+        public string CardNumber { get; set; }
+        public int ExpirationMonth { get; set; }
+        public int ExpirationYear { get; set; }
     }
 }

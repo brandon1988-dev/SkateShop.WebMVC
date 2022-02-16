@@ -13,12 +13,8 @@ namespace SkateShop.Models
         public int ProductID { get; set; }
 
         [Display(Name = "Product Name")]
-        public string ProductName { get; set; }
+        public string Name { get; set; }
 
-        [Display(Name = "Is a complete")]
-        public bool IsComplete { get; set; }
-
-        [Display(Name = "Created")]
-        public DateTimeOffset CreateUtc { get; set; }
+        public decimal Price { get; set; }
     }
 }
