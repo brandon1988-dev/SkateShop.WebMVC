@@ -24,5 +24,11 @@ namespace SkateShop.Models
         [Required]
         [Display(Name = "Price")]
         public decimal Price { get; set; }
+
+        [Display(Name = "Created")]
+        public DateTimeOffset CreatedUtc { get; set; }
+
+        [Display(Name = "Modified")]
+        public DateTimeOffset? ModifiedUtc { get; set; }
     }
 }

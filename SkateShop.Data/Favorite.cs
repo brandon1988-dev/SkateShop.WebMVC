@@ -19,6 +19,9 @@ namespace SkateShop.Data
         [ForeignKey(nameof(Customer))]
         public int CustomerID { get; set; }
 
+        [Required]
+        public Guid OwnerId { get; set; }
+
         public virtual Product Product { get; set; }
 
         public virtual Customer Customer { get; set; }
