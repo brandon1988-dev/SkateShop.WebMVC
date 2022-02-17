@@ -58,6 +58,9 @@
     <Compile Include="Customer\CustomerDetail.cs" />
     <Compile Include="Customer\CustomerEdit.cs" />
     <Compile Include="Customer\CustomerListItem.cs" />
+    <Compile Include="Favorite\FavoriteCreate.cs" />
+    <Compile Include="Favorite\FavoriteDetail.cs" />
+    <Compile Include="Favorite\FavoriteEdit.cs" />
     <Compile Include="Payment\PaymentCreate.cs" />
     <Compile Include="Payment\PaymentDetail.cs" />
     <Compile Include="Payment\PaymentItemList.cs" />
@@ -81,5 +84,6 @@
       <Name>SkateShop.Data</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

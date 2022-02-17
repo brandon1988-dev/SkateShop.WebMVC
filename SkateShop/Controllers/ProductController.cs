@@ -17,7 +17,7 @@ namespace SkateShop.Controllers
         public ActionResult Index()
         {
             List<Product> productList = _db.Products.ToList();
-            List<Product> orderedList = productList.OrderBy(prod => prod.Name).ToList();
+            List<Product> orderedList = productList.OrderBy(prod => prod.ProductName).ToList();
 
             return View(orderedList);
         }

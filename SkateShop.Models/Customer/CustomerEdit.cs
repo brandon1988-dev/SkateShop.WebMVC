@@ -10,6 +10,9 @@ namespace SkateShop.Models.Customer
 {
     public class CustomerEdit
     {
+        [Display(Name = "Customer ID")]
+        public int CustomerID { get; set; }
+
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
 

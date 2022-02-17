@@ -13,7 +13,7 @@ namespace SkateShop.Data
         public int ProductID { get; set; }
 
         [Required]
-        public string Name { get; set; }
+        public string ProductName { get; set; }
 
         public int AvailableStock { get; set; }
 

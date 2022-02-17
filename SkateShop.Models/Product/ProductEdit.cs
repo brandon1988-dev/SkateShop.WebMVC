@@ -12,7 +12,7 @@ namespace SkateShop.Models
         [MinLength(2, ErrorMessage = "Please enter at least 2 characters.")]
         [MaxLength(50, ErrorMessage = "There are too many characters in this field.")]
         [Display(Name = "Product Name")]
-        public string Name { get; set; }
+        public string ProductName { get; set; }
 
         [Display(Name = "Number of Product")]
         public int AvailableStock { get; set; }

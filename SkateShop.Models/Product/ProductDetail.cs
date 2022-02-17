@@ -13,7 +13,7 @@ namespace SkateShop.Models
         public int ProductID { get; set; }
 
         [Display(Name = "Product Name")]
-        public string Name { get; set; }
+        public string ProductName { get; set; }
 
         [Display(Name = "Available Items In Stock")]
         public int AvailableStock { get; set; }

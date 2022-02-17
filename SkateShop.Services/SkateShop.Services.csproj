@@ -54,11 +54,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomerService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SkateShop.Data\SkateShop.Data.csproj">
+      <Project>{F4B09275-A639-4552-B4B8-99226CEE4295}</Project>
+      <Name>SkateShop.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SkateShop.Models\SkateShop.Models.csproj">
+      <Project>{76F02CBE-C2BC-4B28-A7EF-B8E439FA883E}</Project>
+      <Name>SkateShop.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

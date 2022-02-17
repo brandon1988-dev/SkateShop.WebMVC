@@ -10,8 +10,6 @@ namespace SkateShop.Models.Customer
 {
     public class CustomerCreate
     {
-        public int CustomerID { get; set; }
-
         [Required]
         [MinLength(2, ErrorMessage = "Please enter at least 2 characters.")]
         [MaxLength(20, ErrorMessage = "There are too many characters in this field.")]

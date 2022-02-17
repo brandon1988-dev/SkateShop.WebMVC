@@ -13,6 +13,9 @@ namespace SkateShop.Data
         public int CustomerID { get; set; }
 
         [Required]
+        public Guid OwnerID { get; set; }
+
+        [Required]
         public string FirstName { get; set; }
 
         [Required]
@@ -25,5 +28,8 @@ namespace SkateShop.Data
                 return $"{FirstName} {LastName}";
             }
         }
+
+        public virtual PaymentMethod Payment { get; set; }
+        public virtual Favorite Favorite { get; set; }
     }
 }

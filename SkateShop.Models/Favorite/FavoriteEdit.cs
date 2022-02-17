@@ -5,16 +5,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SkateShop.Models
+namespace SkateShop.Models.Favorite
 {
-    public class ProductListItem
+    public class FavoriteEdit
     {
-        [Display(Name = "Product ID")]
+        [Display(Name = "Favorite ID")]
+        public int FavoriteID { get; set; }
+
+        [Display(Name = "Favorite Product ID")]
         public int ProductID { get; set; }
 
-        [Display(Name = "Product Name")]
+        [Display(Name = "Favorite Product Name")]
         public string ProductName { get; set; }
-
-        public decimal Price { get; set; }
     }
 }

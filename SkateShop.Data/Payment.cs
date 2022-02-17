@@ -27,9 +27,22 @@ namespace SkateShop.Data
 
     public class CreditCard : Payment
     {
+        [Required]
         public string CardHolderName { get; set; }
+
+        [Required]
         public string CardNumber { get; set; }
+
+        [Required]
         public int ExpirationMonth { get; set; }
+
+        [Required]
         public int ExpirationYear { get; set; }
+    }
+
+    public class Paypal : Payment
+    {
+        [Required]
+        public string UserEmail { get; set; }
     }
 }
