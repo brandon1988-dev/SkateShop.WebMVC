@@ -61,6 +61,7 @@
     <Compile Include="Favorite\FavoriteCreate.cs" />
     <Compile Include="Favorite\FavoriteDetail.cs" />
     <Compile Include="Favorite\FavoriteEdit.cs" />
+    <Compile Include="Favorite\FavortiteListItem.cs" />
     <Compile Include="Payment\PaymentCreate.cs" />
     <Compile Include="Payment\PaymentDetail.cs" />
     <Compile Include="Payment\PaymentItemList.cs" />

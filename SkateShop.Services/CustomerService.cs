@@ -24,16 +24,12 @@ namespace SkateShop.Services
                 OwnerID = _userId,
                 FirstName = model.FirstName,
                 LastName = model.LastName,
+                Payment = model.PaymentType
             };
             using (var ctx = new ApplicationDbContext())
             {
-                var customer = ctx.Customers.SingleOrDefault(C => C.CustomerID == entity.CustomerID);
-                if (customer is null)
-                {
-                    return false;
-                }
                 ctx.Customers.Add(entity);
-                return ctx.SaveChanges() > 0;
+                return ctx.SaveChanges() == 1;
             }
         }
 
@@ -41,19 +37,23 @@ namespace SkateShop.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var query = ctx
-                       .Customers
-                       .Select(e => new CustomerListItem
-                       {
-                           CustomerID = e.CustomerID,
-                           FullName = e.FullName
-                       }
-                      );
+                var query =
+                    ctx
+                    .Customers
+                    .Where(e => e.OwnerID == _userId)
+                    .Select(
+                        e =>
+                            new CustomerListItem
+                            {
+                                CustomerID = e.CustomerID,
+                                FullName = e.FullName,
+                            }
+                   );
                 return query.ToArray();
             }
         }
 
-        public CustomerDetail GetCustomerDetail(int id)
+        public CustomerDetail GetCustomerByID(int id)
         {
             using (var ctx = new ApplicationDbContext())
             {
@@ -67,9 +67,9 @@ namespace SkateShop.Services
                 return
                     new CustomerDetail
                     {
-                        FavoriteID = entity.Favorite.FavoriteID,
                         CustomerID = entity.CustomerID,
-                        FullName = entity.FullName,
+                        FirstName = entity.FirstName,
+                        LastName = entity.LastName,
                         PaymentType = entity.Payment
                     };
             }
@@ -88,20 +88,24 @@ namespace SkateShop.Services
                     return false;
                 }
                 entity.CustomerID = model.CustomerID;
+                entity.FirstName = model.FirstName;
+                entity.LastName = model.LastName;
+                entity.Payment = model.PaymentType;
+
                 return ctx.SaveChanges() == 1;
             }
         }
 
-        public bool DeleteAlbum(int albumID)
+        public bool DeleteCustomer(int customerID)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var entity =
                     ctx
-                        .Albums
-                        .Single(e => e.AlbumID == albumID);
+                        .Customers
+                        .Single(e => e.CustomerID == customerID);
 
-                ctx.Albums.Remove(entity);
+                ctx.Customers.Remove(entity);
 
                 return ctx.SaveChanges() == 1;
             }

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SkateShop.Models.Payment
+namespace SkateShop.Models
 {
     public class PaymentItemList
     {

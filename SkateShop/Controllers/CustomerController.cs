@@ -1,89 +1,135 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using SkateShop.Data;
+using SkateShop.Models.Customer;
+using SkateShop.Services;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Services.Description;
 
 namespace SkateShop.Controllers
 {
+    [Authorize]
     public class CustomerController : Controller
     {
-        // GET: Customer
+        // GET: Customers
         public ActionResult Index()
         {
-            return View();
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            var service = new CustomerService(userId);
+            var model = service.GetCustomers();
+
+            return View(model);
         }
 
-        // GET: Customer/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: Customer/Create
+        // GET: Create Customer
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Customer/Create
+        // POST: Publish Customer to DB
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(CustomerCreate model)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                // TODO: Add insert logic here
+                return View(model);
+            }
 
-                return RedirectToAction("Index");
-            }
-            catch
+            var service = CreateCustomerService();
+
+            if (service.CreateCustomer(model))
             {
-                return View();
-            }
+                TempData["SaveResult"] = "Your customer was created.";
+                return RedirectToAction("Index");
+            };
+
+            ModelState.AddModelError("", "Customer could not be created.");
+            return View(model);
         }
 
-        // GET: Customer/Edit/5
+        private CustomerService CreateCustomerService()
+        {
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            var service = new CustomerService(userId);
+            return service;
+        }
+
+        public ActionResult Details(int id)
+        {
+            var svc = CreateCustomerService();
+            var model = svc.GetCustomerByID(id);
+
+            return View(model);
+        }
+
         public ActionResult Edit(int id)
         {
-            return View();
+            var service = CreateCustomerService();
+            var detail = service.GetCustomerByID(id);
+            var model =
+                new CustomerEdit
+                {
+                    CustomerID = detail.CustomerID,
+                    FirstName = detail.FirstName,
+                    LastName = detail.LastName,
+                    PaymentType = detail.PaymentType
+                };
+            return View(model);
         }
 
-        // POST: Customer/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, CustomerEdit model)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                // TODO: Add update logic here
+                return View(model);
+            }
+            if (model.CustomerID != id)
+            {
+                ModelState.AddModelError("", "ID Mismatch");
+                return View(model);
+            }
 
+            var service = CreateCustomerService();
+
+            if (service.UpdateCustomer(model))
+            {
+                TempData["Save Result"] = "Your customer was updated.";
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+            ModelState.AddModelError("", "Your note could not be updated.");
+            return View(model);
         }
 
-        // GET: Customer/Delete/5
+        [ActionName("Delete")]
         public ActionResult Delete(int id)
         {
-            return View();
+            var svc = CreateCustomerService();
+            var model = svc.DeleteCustomer(id);
+
+            return View(model);
         }
 
-        // POST: Customer/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        [ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeletePost(int id)
         {
-            try
-            {
-                // TODO: Add delete logic here
+            var service = CreateCustomerService();
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            service.DeleteCustomer(id);
+
+            TempData["Save Result"] = "Your customer was deleted.";
+
+            return RedirectToAction("Index");
         }
     }
 }
