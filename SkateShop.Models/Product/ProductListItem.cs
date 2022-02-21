@@ -15,6 +15,10 @@ namespace SkateShop.Models
         [Display(Name = "Product Name")]
         public string ProductName { get; set; }
 
+        [Display(Name = "Products Available")]
+        public int AvailableStock { get; set; }
+
+        [Display(Name ="Price")]
         public decimal Price { get; set; }
     }
 }

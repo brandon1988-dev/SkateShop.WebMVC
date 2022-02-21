@@ -15,10 +15,14 @@ namespace SkateShop.Data
         [Required]
         public string ProductName { get; set; }
 
+        [Required]
         public int AvailableStock { get; set; }
 
         [Required]
         public decimal Price { get; set; }
+
+        [Required]
+        public Guid OwnerID { get; set; }
 
         [Required]
         public DateTimeOffset CreatedUtc { get; set; }

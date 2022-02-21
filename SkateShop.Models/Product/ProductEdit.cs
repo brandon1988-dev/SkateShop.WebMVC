@@ -9,6 +9,8 @@ namespace SkateShop.Models
 {
     public class ProductEdit
     {
+        public int ProductID { get; set; }
+
         [MinLength(2, ErrorMessage = "Please enter at least 2 characters.")]
         [MaxLength(50, ErrorMessage = "There are too many characters in this field.")]
         [Display(Name = "Product Name")]
