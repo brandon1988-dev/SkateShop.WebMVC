@@ -76,17 +76,17 @@ namespace SkateShop.Controllers
             var model =
                 new CustomerEdit
                 {
-                    CustomerID = detail.CustomerID,
                     FirstName = detail.FirstName,
                     LastName = detail.LastName,
-                    PaymentType = detail.PaymentType
+                    PaymentType = detail.PaymentType,
+                    FavoriteID = detail.FavoriteID
                 };
             return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, CustomerEdit model)
+        public ActionResult Edit(int? id, CustomerEdit model)
         {
             if (!ModelState.IsValid)
             {

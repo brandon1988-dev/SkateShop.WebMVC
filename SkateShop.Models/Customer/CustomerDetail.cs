@@ -1,4 +1,5 @@
 ﻿using SkateShop.Data;
+using SkateShop.Models.Favorite;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -22,5 +23,10 @@ namespace SkateShop.Models.Customer
 
         [Display(Name = "Payment Method")]
         public PaymentMethod PaymentType { get; set; }
+
+        [Display(Name = "Favorites")]
+        public List<FavortiteListItem> Favorites { get; set; }
+
+        public int FavoriteID { get; set; }
     }
 }

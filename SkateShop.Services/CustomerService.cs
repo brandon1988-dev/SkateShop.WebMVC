@@ -40,13 +40,13 @@ namespace SkateShop.Services
                 var query =
                     ctx
                     .Customers
-                    .Where(e => e.OwnerID == _userId)
                     .Select(
                         e =>
                             new CustomerListItem
                             {
                                 CustomerID = e.CustomerID,
-                                FullName = e.FullName,
+                                FirstName = e.FirstName,
+                                LastName = e.LastName
                             }
                    );
                 return query.ToArray();
@@ -59,7 +59,7 @@ namespace SkateShop.Services
             {
                 var entity = ctx
                         .Customers
-                        .SingleOrDefault(e => e.CustomerID == id);
+                        .Single(e => e.CustomerID == id);
                 if (entity is null)
                 {
                     return null;
@@ -82,7 +82,7 @@ namespace SkateShop.Services
                 var entity =
                     ctx
                         .Customers
-                        .SingleOrDefault(e => e.CustomerID == model.CustomerID);
+                        .Single(e => e.CustomerID == model.CustomerID && e.OwnerID == _userId);
                 if (entity is null)
                 {
                     return false;
@@ -102,11 +102,9 @@ namespace SkateShop.Services
             {
                 var entity =
                     ctx
-                        .Customers
-                        .Single(e => e.CustomerID == customerID);
-
+                    .Customers
+                    .Single(e => e.CustomerID == customerID && e.OwnerID == _userId);
                 ctx.Customers.Remove(entity);
-
                 return ctx.SaveChanges() == 1;
             }
         }

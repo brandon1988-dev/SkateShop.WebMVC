@@ -13,7 +13,10 @@ namespace SkateShop.Models.Customer
         [Display(Name = "Customer ID")]
         public int CustomerID { get; set; }
 
-        [Display(Name = "Customer Name")]
-        public string FullName { get; set; }
+        [Display(Name = "Customer First Name")]
+        public string FirstName { get; set; }
+
+        [Display(Name = "Customer Last Name")]
+        public string LastName { get; set; }
     }
 }
