@@ -17,7 +17,7 @@ namespace SkateShop.Services
             _userId = userId;
         }
 
-        public bool CreateCustomer(CustomerCreate model)
+        public bool CustomerCreate(CustomerCreate model)
         {
             var entity = new Customer()
             {
@@ -59,7 +59,7 @@ namespace SkateShop.Services
             {
                 var entity = ctx
                         .Customers
-                        .Single(e => e.CustomerID == id);
+                        .SingleOrDefault(e => e.CustomerID == id);
                 if (entity is null)
                 {
                     return null;
@@ -82,7 +82,7 @@ namespace SkateShop.Services
                 var entity =
                     ctx
                         .Customers
-                        .Single(e => e.CustomerID == model.CustomerID && e.OwnerID == _userId);
+                        .SingleOrDefault(e => e.CustomerID == model.CustomerID);
                 if (entity is null)
                 {
                     return false;
@@ -103,7 +103,7 @@ namespace SkateShop.Services
                 var entity =
                     ctx
                     .Customers
-                    .Single(e => e.CustomerID == customerID && e.OwnerID == _userId);
+                    .SingleOrDefault(e => e.CustomerID == customerID);
                 ctx.Customers.Remove(entity);
                 return ctx.SaveChanges() == 1;
             }

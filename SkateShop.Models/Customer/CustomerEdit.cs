@@ -10,7 +10,7 @@ namespace SkateShop.Models.Customer
 {
     public class CustomerEdit
     {
-        public int CustomerID { get; }
+        public int CustomerID { get; set; }
 
         [Display(Name = "Favorite ID")]
         public int FavoriteID { get; set; }
