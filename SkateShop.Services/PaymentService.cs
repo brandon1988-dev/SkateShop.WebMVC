@@ -1,5 +1,6 @@
 ﻿using SkateShop.Data;
 using SkateShop.Models;
+using SkateShop.Models.Payment;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,93 +21,91 @@ namespace SkateShop.Services
         {
             var entity = new Payment()
             {
-                BillingAddress = model.BillingAddress,
+                PaymentID = model.PaymentID,
+                PaymentType = model.PaymentType
+
             };
             using (var ctx = new ApplicationDbContext())
             {
-                ctx.Products.Add(entity);
+                ctx.Payments.Add(entity);
                 return ctx.SaveChanges() == 1;
             }
         }
 
-        public IEnumerable<ProductListItem> GetProducts()
+        public IEnumerable<PaymentListItem> GetPayment()
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var query =
                     ctx
-                    .Products
+                    .Payments
                     .Select(
                         e =>
-                            new ProductListItem
+                            new PaymentListItem
                             {
-                                ProductID = e.ProductID,
-                                ProductName = e.ProductName,
-                                AvailableStock = e.AvailableStock,
-                                Price = e.Price,
+                                PaymentID = e.PaymentID
                             }
                    );
                 return query.ToArray();
             }
         }
 
-        public ProductDetail GetProductByID(int id)
+        public PaymentDetail GetPaymentByID(int id)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var entity = ctx
-                        .Products
-                        .SingleOrDefault(e => e.ProductID == id);
+                        .Payments
+                        .SingleOrDefault(e => e.PaymentID == id);
                 if (entity is null)
                 {
                     return null;
                 }
                 return
-                    new ProductDetail
+                    new PaymentDetail
                     {
-                        ProductID = entity.ProductID,
-                        ProductName = entity.ProductName,
-                        AvailableStock = entity.AvailableStock,
-                        Price = entity.Price,
-                        CreatedUtc = entity.CreatedUtc,
-                        ModifiedUtc = entity.ModifiedUtc
+                        PaymentID = entity.PaymentID,
+                        PaymentType = entity.PaymentType,
+                        CreatedUtc = entity.CreatedUtc
                     };
             }
         }
-
-        public bool UpdateProduct(ProductEdit model)
+        public bool UpdatePayment(PaymentEdit model)
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var entity =
+                var entity =  
                     ctx
-                        .Products
-                        .SingleOrDefault(e => e.ProductID == model.ProductID);
-                if (entity is null)
+                        .Payments
+                        .SingleOrDefault(e => e.PaymentID == model.PaymentID);
+                if (entity is CreditCard creditCard)
                 {
-                    return false;
+                    creditCard.PaymentID = model.PaymentID;
+                    creditCard.BillingAddress = model.BillingAddress;
+                    creditCard.CardHolderName = model.CardHolderName;
+                    creditCard.CardNumber = model.CardNumber;
+                    creditCard.ExpirationMonth = model.ExpirationMonth;
+                    creditCard.ExpirationYear = model.ExpirationYear;
                 }
-                entity.ProductID = model.ProductID;
-                entity.ProductName = model.ProductName;
-                entity.AvailableStock = model.AvailableStock;
-                entity.Price = model.Price;
-
-                return ctx.SaveChanges() == 1;
+                else if (entity is Paypal paypal)
+                {
+                    paypal.UserEmail = model.UserEmail;
+                }
+                    return ctx.SaveChanges() == 1;
             }
         }
-
-        public bool DeleteProduct(int productID)
+        public bool DeletePayment(int paymentID)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var entity =
                     ctx
-                    .Products
-                    .SingleOrDefault(e => e.ProductID == productID);
-                ctx.Products.Remove(entity);
+                    .Payments
+                    .SingleOrDefault(e => e.PaymentID == paymentID);
+                ctx.Payments.Remove(entity);
                 return ctx.SaveChanges() == 1;
             }
         }
     }
 }
-}
+

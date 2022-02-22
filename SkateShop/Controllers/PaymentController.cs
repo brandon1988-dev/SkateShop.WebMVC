@@ -1,4 +1,9 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using SkateShop.Data;
+using SkateShop.Models;
+using SkateShop.Models.Payment;
+using SkateShop.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,84 +11,125 @@ using System.Web.Mvc;
 
 namespace SkateShop.Controllers
 {
+    [Authorize]
     public class PaymentController : Controller
     {
-        // GET: PaymentMethod
+        // GET: Payment
         public ActionResult Index()
         {
-            return View();
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            var service = new PaymentService(userId);
+            var model = service.GetPayment();
+
+            return View(model);
         }
 
-        // GET: PaymentMethod/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: PaymentMethod/Create
+        // GET: Create Payment
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: PaymentMethod/Create
+        // POST: Publish Payment to DB
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(PaymentCreate model)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                // TODO: Add insert logic here
+                return View(model);
+            }
 
-                return RedirectToAction("Index");
-            }
-            catch
+            var service = CreatePaymentService();
+
+            if (service.PaymentCreate(model))
             {
-                return View();
-            }
+                TempData["SaveResult"] = "Your payment was created.";
+                return RedirectToAction("Index");
+            };
+
+            ModelState.AddModelError("", "Payment could not be created.");
+            return View(model);
         }
 
-        // GET: PaymentMethod/Edit/5
+        private PaymentService CreatePaymentService()
+        {
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            var service = new PaymentService(userId);
+            return service;
+        }
+
+        public ActionResult Details(int id)
+        {
+            var svc = CreatePaymentService();
+            var model = svc.GetPaymentByID(id);
+
+            return View(model);
+        }
+
         public ActionResult Edit(int id)
         {
-            return View();
+            var service = CreatePaymentService();
+            var detail = service.GetPaymentByID(id);
+            var model =
+                new PaymentEdit
+                {
+                    PaymentID = detail.PaymentID,
+                    BillingAddress = detail.BillingAddress,
+                    CardHolderName = detail.CardHolderName,
+                    CardNumber = detail.CardNumber,
+                    ExpirationMonth = detail.ExpirationMonth,
+                    ExpirationYear = detail.ExpirationYear,
+                    UserEmail = detail.UserEmail
+                };
+            return View(model);
         }
 
-        // POST: PaymentMethod/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, PaymentEdit model)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                // TODO: Add update logic here
+                return View(model);
+            }
+            if (model.PaymentID != id)
+            {
+                ModelState.AddModelError("", "ID Mismatch");
+                return View(model);
+            }
+            var service = CreatePaymentService();
 
+            if (service.UpdatePayment(model))
+            {
+                TempData["Save Result"] = "Your payment was updated.";
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+            ModelState.AddModelError("", "Your payment could not be updated.");
+            return View(model);
         }
 
-        // GET: PaymentMethod/Delete/5
+        [ActionName("Delete")]
         public ActionResult Delete(int id)
         {
-            return View();
+            var svc = CreatePaymentService();
+            var model = svc.DeletePayment(id);
+
+            return View(model);
         }
 
-        // POST: PaymentMethod/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        [ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeletePost(int id)
         {
-            try
-            {
-                // TODO: Add delete logic here
+            var service = CreatePaymentService();
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            service.DeletePayment(id);
+
+            TempData["Save Result"] = "Your payment was deleted.";
+
+            return RedirectToAction("Index");
         }
     }
 }

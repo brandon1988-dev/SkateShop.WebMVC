@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
+using SkateShop.Models;
+using SkateShop.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,14 +9,16 @@ using System.Web.Mvc;
 
 namespace SkateShop.Controllers
 {
+    [Authorize]
     public class ProductController : Controller
     {
+
         // GET: Products
         public ActionResult Index()
         {
             var userId = Guid.Parse(User.Identity.GetUserId());
             var service = new ProductService(userId);
-            var model = service.GetCustomers();
+            var model = service.GetProducts();
 
             return View(model);
         }
@@ -28,85 +32,84 @@ namespace SkateShop.Controllers
         // POST: Publish Customer to DB
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(CustomerCreate model)
+        public ActionResult Create(ProductCreate model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
 
-            var service = CreateCustomerService();
+            var service = CreateProductService();
 
-            if (service.CustomerCreate(model))
+            if (service.ProductCreate(model))
             {
-                TempData["SaveResult"] = "Your customer was created.";
+                TempData["SaveResult"] = "Your product was created.";
                 return RedirectToAction("Index");
             };
 
-            ModelState.AddModelError("", "Customer could not be created.");
+            ModelState.AddModelError("", "Product could not be created.");
             return View(model);
         }
 
-        private CustomerService CreateCustomerService()
+        private ProductService CreateProductService()
         {
             var userId = Guid.Parse(User.Identity.GetUserId());
-            var service = new CustomerService(userId);
+            var service = new ProductService(userId);
             return service;
         }
 
         public ActionResult Details(int id)
         {
-            var svc = CreateCustomerService();
-            var model = svc.GetCustomerByID(id);
+            var svc = CreateProductService();
+            var model = svc.GetProductByID(id);
 
             return View(model);
         }
 
         public ActionResult Edit(int id)
         {
-            var service = CreateCustomerService();
-            var detail = service.GetCustomerByID(id);
+            var service = CreateProductService();
+            var detail = service.GetProductByID(id);
             var model =
-                new CustomerEdit
+                new ProductEdit
                 {
-                    CustomerID = detail.CustomerID,
-                    FirstName = detail.FirstName,
-                    LastName = detail.LastName,
-                    PaymentType = detail.PaymentType,
-                    FavoriteID = detail.FavoriteID
+                    ProductID = detail.ProductID,
+                    ProductName = detail.ProductName,
+                    AvailableStock = detail.AvailableStock,
+                    Price = detail.Price
                 };
             return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, CustomerEdit model)
+        public ActionResult Edit(int id, ProductEdit model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
-            if (model.CustomerID != id)
+            if (model.ProductID != id)
             {
-                ModelState.AddModelError("", "Id Mismatch");
+                ModelState.AddModelError("", "ID Mismatch");
                 return View(model);
             }
-            var service = CreateCustomerService();
+            var service = CreateProductService();
 
-            if (service.UpdateCustomer(model))
+            if (service.UpdateProduct(model))
             {
-                TempData["Save Result"] = "Your customer was updated.";
+                TempData["Save Result"] = "Your product was updated.";
                 return RedirectToAction("Index");
             }
-            ModelState.AddModelError("", "Your customer could not be updated.");
+            ModelState.AddModelError("", "Your product could not be updated.");
             return View(model);
         }
 
         [ActionName("Delete")]
         public ActionResult Delete(int id)
         {
-            var svc = CreateCustomerService();
-            var model = svc.DeleteCustomer(id);
+            var svc = CreateProductService();
+            var model = svc.DeleteProduct(id);
 
             return View(model);
         }
@@ -116,11 +119,11 @@ namespace SkateShop.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeletePost(int id)
         {
-            var service = CreateCustomerService();
+            var service = CreateProductService();
 
-            service.DeleteCustomer(id);
+            service.DeleteProduct(id);
 
-            TempData["Save Result"] = "Your customer was deleted.";
+            TempData["Save Result"] = "Your product was deleted.";
 
             return RedirectToAction("Index");
         }

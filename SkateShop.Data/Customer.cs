@@ -28,8 +28,8 @@ namespace SkateShop.Data
                 return $"{FirstName} {LastName}";
             }
         }
-
         public virtual PaymentMethod Payment { get; set; }
+
         public virtual List<Favorite> Favorites { get; set; } = new List<Favorite>();
     }
 }

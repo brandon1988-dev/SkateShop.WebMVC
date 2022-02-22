@@ -18,11 +18,16 @@ namespace SkateShop.Data
     public class Payment
     {
         [Key]
-        public string PaymentID { get; set; }
+        public int PaymentID { get; set; }
 
+        [Required]
         public PaymentMethod PaymentType { get; set; }
 
+        [Required]
         public string BillingAddress { get; set; }
+
+        public DateTimeOffset CreatedUtc { get; set; }
+
     }
 
     public class CreditCard : Payment
@@ -31,7 +36,7 @@ namespace SkateShop.Data
         public string CardHolderName { get; set; }
 
         [Required]
-        public string CardNumber { get; set; }
+        public int CardNumber { get; set; }
 
         [Required]
         public int ExpirationMonth { get; set; }

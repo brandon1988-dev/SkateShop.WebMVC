@@ -21,7 +21,6 @@ namespace SkateShop.Services
             var entity = new Product()
             {
                 OwnerID = _userId,
-                ProductID = model.ProductID,
                 ProductName = model.ProductName,
                 AvailableStock = model.AvailableStock,
                 Price = model.Price,

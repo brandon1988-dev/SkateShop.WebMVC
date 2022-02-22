@@ -69,6 +69,14 @@
     <Compile Include="Migrations\202202211702210_fixinit.Designer.cs">
       <DependentUpon>202202211702210_fixinit.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202202221432290_productmodels.cs" />
+    <Compile Include="Migrations\202202221432290_productmodels.Designer.cs">
+      <DependentUpon>202202221432290_productmodels.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202202221936157_paymentmodels.cs" />
+    <Compile Include="Migrations\202202221936157_paymentmodels.Designer.cs">
+      <DependentUpon>202202221936157_paymentmodels.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Payment.cs" />
     <Compile Include="Product.cs" />
@@ -88,6 +96,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202202211702210_fixinit.resx">
       <DependentUpon>202202211702210_fixinit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202202221432290_productmodels.resx">
+      <DependentUpon>202202221432290_productmodels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202202221936157_paymentmodels.resx">
+      <DependentUpon>202202221936157_paymentmodels.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
