@@ -30,6 +30,6 @@ namespace SkateShop.Data
         }
         public virtual PaymentMethod Payment { get; set; }
 
-        public virtual List<Favorite> Favorites { get; set; } = new List<Favorite>();
+        public virtual List<Favorite> Favorites { get; set; }
     }
 }

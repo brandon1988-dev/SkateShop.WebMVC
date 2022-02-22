@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SkateShop.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -29,7 +30,7 @@ namespace SkateShop.Models.Payment
         [Display(Name ="User Email")]
         public string UserEmail { get; set; }
 
-
+        public PaymentMethod PaymentType { get; set; }
 
     }
 }

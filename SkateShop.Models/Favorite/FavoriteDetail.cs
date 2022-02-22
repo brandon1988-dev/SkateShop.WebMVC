@@ -12,6 +12,7 @@ namespace SkateShop.Models.Favorite
         [Display(Name = "Favorite ID")]
         public int FavoriteID { get; set; }
 
+
         [Display(Name = "Favorite Product ID")]
         public int ProductID { get; set; }
 

@@ -7,12 +7,14 @@ using System.Threading.Tasks;
 
 namespace SkateShop.Models.Favorite
 {
-    public class FavortiteListItem
+    public class FavoriteListItem
     {
         [Display(Name = "Favorite ID")]
         public int FavoriteID { get; set; }
 
-        [Display(Name = "Favorite Name")]
-        public string FavoriteName { get; set; }
+        [Display(Name = "Customer ID")]
+        public int CustomerID { get; set; }
+
+
     }
 }

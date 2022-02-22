@@ -80,7 +80,8 @@ namespace SkateShop.Controllers
                     CardNumber = detail.CardNumber,
                     ExpirationMonth = detail.ExpirationMonth,
                     ExpirationYear = detail.ExpirationYear,
-                    UserEmail = detail.UserEmail
+                    UserEmail = detail.UserEmail,
+                    PaymentType = detail.PaymentType
                 };
             return View(model);
         }

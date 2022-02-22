@@ -11,10 +11,11 @@
     @Html.AntiForgeryToken()
     
 <div class="form-horizontal">
-    <h4>PaymentEdit</h4>
+    <h4>Payment Edit</h4>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.HiddenFor(model => model.PaymentID)
+
 
     <div class="form-group">
         @Html.LabelFor(model => model.BillingAddress, htmlAttributes: new { @class = "control-label col-md-2" })

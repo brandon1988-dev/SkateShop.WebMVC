@@ -19,15 +19,18 @@ namespace SkateShop.Services
 
         public bool PaymentCreate(PaymentCreate model)
         {
-            var entity = new Payment()
+            Payment payment =  new Payment();
             {
-                PaymentID = model.PaymentID,
-                PaymentType = model.PaymentType
-
+                payment.PaymentType = PaymentMethod.Cash;
+                payment.PaymentType = PaymentMethod.Visa;
+                payment.PaymentType = PaymentMethod.Mastercard;
+                payment.PaymentType = PaymentMethod.Discover;
+                payment.PaymentType = PaymentMethod.AmericanExpress;
+                payment.PaymentType = PaymentMethod.PayPal;
             };
             using (var ctx = new ApplicationDbContext())
             {
-                ctx.Payments.Add(entity);
+                ctx.Payments.Add(payment);
                 return ctx.SaveChanges() == 1;
             }
         }
@@ -43,7 +46,7 @@ namespace SkateShop.Services
                         e =>
                             new PaymentListItem
                             {
-                                PaymentID = e.PaymentID
+                                PaymentID = e.PaymentID,
                             }
                    );
                 return query.ToArray();
@@ -86,6 +89,7 @@ namespace SkateShop.Services
                     creditCard.CardNumber = model.CardNumber;
                     creditCard.ExpirationMonth = model.ExpirationMonth;
                     creditCard.ExpirationYear = model.ExpirationYear;
+                    creditCard.PaymentType = model.PaymentType;
                 }
                 else if (entity is Paypal paypal)
                 {

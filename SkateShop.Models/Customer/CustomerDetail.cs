@@ -25,7 +25,7 @@ namespace SkateShop.Models.Customer
         public PaymentMethod PaymentType { get; set; }
 
         [Display(Name = "Favorites")]
-        public List<FavortiteListItem> Favorites { get; set; }
+        public  List<FavoriteListItem> Favorites { get; set; }
 
         public int FavoriteID { get; set; }
     }

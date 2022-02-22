@@ -24,5 +24,6 @@ namespace SkateShop.Models.Customer
 
         [Required]
         public PaymentMethod PaymentType { get; set; }
+
     }
 }

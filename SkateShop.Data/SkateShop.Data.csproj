@@ -77,6 +77,10 @@
     <Compile Include="Migrations\202202221936157_paymentmodels.Designer.cs">
       <DependentUpon>202202221936157_paymentmodels.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202202222119154_paymentupdate.cs" />
+    <Compile Include="Migrations\202202222119154_paymentupdate.Designer.cs">
+      <DependentUpon>202202222119154_paymentupdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Payment.cs" />
     <Compile Include="Product.cs" />
@@ -102,6 +106,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202202221936157_paymentmodels.resx">
       <DependentUpon>202202221936157_paymentmodels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202202222119154_paymentupdate.resx">
+      <DependentUpon>202202222119154_paymentupdate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
