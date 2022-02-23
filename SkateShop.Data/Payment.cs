@@ -26,6 +26,8 @@ namespace SkateShop.Data
         [Required]
         public string BillingAddress { get; set; }
 
+        [Required]
+        public Guid OwnerID { get; set; }
 
         public DateTimeOffset CreatedUtc { get; set; }
 

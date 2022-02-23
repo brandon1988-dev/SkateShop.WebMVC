@@ -19,14 +19,12 @@ namespace SkateShop.Services
 
         public bool PaymentCreate(PaymentCreate model)
         {
-            Payment payment =  new Payment();
+            Payment payment =  new Payment()
             {
-                payment.PaymentType = PaymentMethod.Cash;
-                payment.PaymentType = PaymentMethod.Visa;
-                payment.PaymentType = PaymentMethod.Mastercard;
-                payment.PaymentType = PaymentMethod.Discover;
-                payment.PaymentType = PaymentMethod.AmericanExpress;
-                payment.PaymentType = PaymentMethod.PayPal;
+                PaymentType = model.PaymentType,
+                BillingAddress = model.BillingAddress,
+                CreatedUtc = DateTimeOffset.Now,
+                OwnerID = _userId,
             };
             using (var ctx = new ApplicationDbContext())
             {

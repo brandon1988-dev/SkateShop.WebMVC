@@ -20,7 +20,11 @@ namespace SkateShop.Services
         {
             var entity = new Favorite()
             {
-                Product = model.Product
+                CustomerID =model.CustomerID,
+                FavoriteID = model.FavoriteID,
+                FavoriteName = model.FavoriteName,
+                ProductID = model.ProductID,
+                ProductName = model.ProductName,
             };
             using (var ctx = new ApplicationDbContext())
             {
@@ -47,7 +51,6 @@ namespace SkateShop.Services
                 return query.ToArray();
             }
         }
-
         public FavoriteDetail GetFavoriteByID(int id)
         {
             using (var ctx = new ApplicationDbContext())
@@ -88,7 +91,6 @@ namespace SkateShop.Services
                 return ctx.SaveChanges() == 1;
             }
         }
-
         public bool DeleteFavorite(int favoriteID)
         {
             using (var ctx = new ApplicationDbContext())

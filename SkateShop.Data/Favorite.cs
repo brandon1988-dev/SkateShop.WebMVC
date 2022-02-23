@@ -13,17 +13,9 @@ namespace SkateShop.Data
         [Key]
         public int FavoriteID { get; set; }
 
-        [ForeignKey(nameof(Product))]
         public int ProductID { get; set; }
-
-        [ForeignKey(nameof(Customer))]
         public int CustomerID { get; set; }
-
         public string FavoriteName { get; set; }
         public string ProductName { get; set; }
-
-        public virtual Product Product { get; set; }
-
-        public virtual Customer Customer { get; set; }
     }
 }

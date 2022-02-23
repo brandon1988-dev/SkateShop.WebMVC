@@ -1,5 +1,6 @@
 ﻿using SkateShop.Data;
 using SkateShop.Models;
+using SkateShop.Models.Favorite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,7 +53,6 @@ namespace SkateShop.Services
                 return query.ToArray();
             }
         }
-
         public ProductDetail GetProductByID(int id)
         {
             using (var ctx = new ApplicationDbContext())

@@ -18,8 +18,30 @@ namespace SkateShop.Models
         public PaymentMethod PaymentType { get; set; }
 
         [Required]
-        [Display(Name = "Created")]
-        public DateTimeOffset CreatedUtc { get; set; }
+        [MinLength(2, ErrorMessage = "Please enter at least 2 characters.")]
+        [MaxLength(20, ErrorMessage = "There are too many characters in this field.")]
+        [Display(Name = "Card Holder Name")]
+        public string CardHolderName { get; set; }
+
+        [Required]
+        [Display(Name = "Billing Address")]
+        public string BillingAddress { get; set; }
+
+        [Required]
+        [Display(Name = "Card #")]
+        public int CardNumber { get; set; }
+
+        [Required]
+        [Display(Name = "Expiration Month")]
+        public int ExpirationMonth { get; set; }
+
+        [Required]
+        [Display(Name = "Expiration Year")]
+        public int ExpirationYear { get; set; }
+
+        [Required]
+        [Display(Name = "User Email")]
+        public string UserEmail { get; set; }
 
     }
 }

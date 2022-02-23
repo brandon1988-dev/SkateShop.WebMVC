@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using SkateShop.Models.Favorite;
+using SkateShop.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,82 +11,119 @@ namespace SkateShop.Controllers
 {
     public class FavoriteController : Controller
     {
-        // GET: Favorite
+        // GET: Favorites
         public ActionResult Index()
         {
-            return View();
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            var service = new FavoriteService(userId);
+            var model = service.GetFavorites();
+
+            return View(model);
         }
 
-        // GET: Favorite/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: Favorite/Create
+        // GET: Create Favorite
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Favorite/Create
+        // POST: Publish Favorite to DB
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateFavorite(FavoriteCreate model)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                // TODO: Add insert logic here
+                return View(model);
+            }
 
-                return RedirectToAction("Index");
-            }
-            catch
+            var service = CreateFavoriteService();
+
+            if (service.FavoriteCreate(model))
             {
-                return View();
-            }
+                TempData["SaveResult"] = "Your favorite was created.";
+                return RedirectToAction("Index");
+            };
+
+            ModelState.AddModelError("", "Favorite could not be created.");
+            return View(model);
         }
 
-        // GET: Favorite/Edit/5
+
+        private FavoriteService CreateFavoriteService()
+        {
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            var service = new FavoriteService(userId);
+            return service;
+        }
+
+        public ActionResult Details(int id)
+        {
+            var svc = CreateFavoriteService();
+            var model = svc.GetFavoriteByID(id);
+
+            return View(model);
+        }
+
         public ActionResult Edit(int id)
         {
-            return View();
+            var service = CreateFavoriteService();
+            var detail = service.GetFavoriteByID(id);
+            var model =
+                new FavoriteEdit
+                {
+                    FavoriteID = detail.FavoriteID,
+                    ProductID = detail.ProductID,
+                    ProductName = detail.ProductName,
+                };
+            return View(model);
         }
 
-        // POST: Favorite/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, FavoriteEdit model)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                // TODO: Add update logic here
+                return View(model);
+            }
+            if (model.FavoriteID != id)
+            {
+                ModelState.AddModelError("", "ID Mismatch");
+                return View(model);
+            }
+            var service = CreateFavoriteService();
 
+            if (service.UpdateFavorite(model))
+            {
+                TempData["Save Result"] = "Your favorite was updated.";
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+            ModelState.AddModelError("", "Your favorite could not be updated.");
+            return View(model);
         }
 
-        // GET: Favorite/Delete/5
+        [ActionName("Delete")]
         public ActionResult Delete(int id)
         {
-            return View();
+            var svc = CreateFavoriteService();
+            var model = svc.DeleteFavorite(id);
+
+            return View(model);
         }
 
-        // POST: Favorite/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        [ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeletePost(int id)
         {
-            try
-            {
-                // TODO: Add delete logic here
+            var service = CreateFavoriteService();
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            service.DeleteFavorite(id);
+
+            TempData["Save Result"] = "Your product was deleted.";
+
+            return RedirectToAction("Index");
         }
     }
 }

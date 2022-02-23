@@ -11,9 +11,7 @@ namespace SkateShop.Models
 {
     public class PaymentDetail
     {
-        [ForeignKey(nameof(Customer))]
-        [Display(Name = "Customer ID")]
-        public int CustomerID { get; set; }
+        public Guid OwnerID { get; set; }
 
         [Display(Name = "Payment ID")]
         public int PaymentID { get; set; }

@@ -9,16 +9,16 @@ namespace SkateShop.Models.Transaction
 {
     public class TransactionDetail
     {
-        public int ID { get; set; }
+        public int TransactionID { get; set; }
 
         public int ItemCount { get; set; }
 
-        public string CustomerName { get; set; }
+        public string LastName { get; set; }
 
         public string ProductName { get; set; }
 
         public PaymentMethod PaymentType { get; set; }
 
-        public double PaymentAmount { get; set; }
+        public double? PaymentAmount { get; set; }
     }
 }
