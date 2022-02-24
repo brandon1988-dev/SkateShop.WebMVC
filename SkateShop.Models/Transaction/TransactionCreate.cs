@@ -20,5 +20,11 @@ namespace SkateShop.Models.Transaction
 
         [Required]
         public int ItemCount { get; set; }
+
+        [Required]
+        public int PaymentID { get; set; }
+
+        [Required]
+        public double? PaymentAmount { get; set; }
     }
 }

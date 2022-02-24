@@ -113,7 +113,7 @@ namespace SkateShop.Controllers
         public ActionResult Delete(int id)
         {
             var svc = CreateCustomerService();
-            var model = svc.DeleteCustomer(id);
+            var model = svc.GetCustomerByID(id);
 
             return View(model);
         }

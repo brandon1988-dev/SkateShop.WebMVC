@@ -37,6 +37,6 @@ namespace SkateShop.Data
         public virtual Customer Customer { get; set; }
         public virtual Product Product { get; set; }
 
-        public virtual PaymentMethod Payment { get; set; }
+        public virtual Payment Payment { get; set; }
     }
 }

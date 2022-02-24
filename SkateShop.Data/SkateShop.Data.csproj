@@ -89,6 +89,10 @@
     <Compile Include="Migrations\202202241548557_transactionmodels.Designer.cs">
       <DependentUpon>202202241548557_transactionmodels.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202202241824328_transactionmodelfix.cs" />
+    <Compile Include="Migrations\202202241824328_transactionmodelfix.Designer.cs">
+      <DependentUpon>202202241824328_transactionmodelfix.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Payment.cs" />
     <Compile Include="Product.cs" />
@@ -123,6 +127,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202202241548557_transactionmodels.resx">
       <DependentUpon>202202241548557_transactionmodels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202202241824328_transactionmodelfix.resx">
+      <DependentUpon>202202241824328_transactionmodelfix.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

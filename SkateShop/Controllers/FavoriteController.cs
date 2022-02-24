@@ -105,7 +105,7 @@ namespace SkateShop.Controllers
         public ActionResult Delete(int id)
         {
             var svc = CreateFavoriteService();
-            var model = svc.DeleteFavorite(id);
+            var model = svc.GetFavoriteByID(id);
 
             return View(model);
         }

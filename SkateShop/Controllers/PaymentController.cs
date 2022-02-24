@@ -114,7 +114,7 @@ namespace SkateShop.Controllers
         public ActionResult Delete(int id)
         {
             var svc = CreatePaymentService();
-            var model = svc.DeletePayment(id);
+            var model = svc.GetPaymentByID(id);
 
             return View(model);
         }
