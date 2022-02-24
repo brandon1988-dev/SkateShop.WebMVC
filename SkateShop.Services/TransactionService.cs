@@ -21,11 +21,10 @@ namespace SkateShop.Services
         {
             var entity = new Transaction()
             {
-                TransactionID = model.CustomerID,
+                CustomerID = model.CustomerID,
                 ProductID = model.ProductID,
-                PaymentID = model.PaymentID,
                 ItemCount = model.ItemCount,
-                
+                DateOfTransaction = DateTime.Now
             };
             using (var ctx = new ApplicationDbContext())
             {
@@ -47,10 +46,9 @@ namespace SkateShop.Services
                             {
                                 ID = e.ID,
                                 ItemCount = e.ItemCount,
-                                LastName = e.LastName,
-                                ProductName = e.ProductName,
+                                CustomerName = e.Customer.LastName,
+                                ProductName = e.Product.ProductName,
                                 CreatedUtc = DateTimeOffset.Now,
-                                PaymentAmount = e.PaymentAmount
                             }
                    );
                 return query.ToArray();
@@ -63,7 +61,7 @@ namespace SkateShop.Services
             {
                 var entity = ctx
                         .Transactions
-                        .SingleOrDefault(e => e.TransactionID == id);
+                        .SingleOrDefault(e => e.ID == id);
                 if (entity is null)
                 {
                     return null;
@@ -71,12 +69,11 @@ namespace SkateShop.Services
                 return
                     new TransactionDetail
                     {
-                        TransactionID = entity.TransactionID,
+                        ID = entity.ID,
                         ItemCount = entity.ItemCount,
-                        LastName = entity.LastName,
-                        ProductName = entity.ProductName,
+                        ProductID = entity.ProductID,
                         PaymentAmount = entity.PaymentAmount,
-                        PaymentType = entity.PaymentType
+                        PaymentType = entity.Payment
                     };
             }
         }
@@ -87,30 +84,16 @@ namespace SkateShop.Services
                 var entity =
                     ctx
                         .Transactions
-                        .SingleOrDefault(e => e.TransactionID == model.TransactionID);
+                        .SingleOrDefault(e => e.ID == model.ID);
                 if (entity is null)
                 {
                     return false;
                 }
-                entity.TransactionID = model.TransactionID;
+                entity.ID = model.ID;
                 entity.CustomerID = model.CustomerID;
-                entity.LastName = model.LastName;
-                entity.PaymentID = model.PaymentID;
                 entity.ProductID = model.ProductID;
                 entity.ItemCount = model.ItemCount;
 
-                return ctx.SaveChanges() == 1;
-            }
-        }
-        public bool DeleteCustomer(int customerID)
-        {
-            using (var ctx = new ApplicationDbContext())
-            {
-                var entity =
-                    ctx
-                    .Customers
-                    .SingleOrDefault(e => e.CustomerID == customerID);
-                ctx.Customers.Remove(entity);
                 return ctx.SaveChanges() == 1;
             }
         }

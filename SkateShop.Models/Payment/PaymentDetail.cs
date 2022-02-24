@@ -13,7 +13,7 @@ namespace SkateShop.Models
     {
         public Guid OwnerID { get; set; }
 
-        [Display(Name = "Payment ID")]
+        [Display(Name = "Payment #")]
         public int PaymentID { get; set; }
 
         [Display(Name = "Billing Address")]

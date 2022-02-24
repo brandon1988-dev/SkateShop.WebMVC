@@ -9,18 +9,15 @@ namespace SkateShop.Models.Transaction
 {
     public class TransactionEdit
     {
-        public int TransactionID { get; set; }
+        public int ID { get; set; }
+
+        [Display(Name = "Customer ID")]
         public int CustomerID { get; set; }
 
-        [MinLength(2, ErrorMessage = "Please enter at least 2 characters.")]
-        [MaxLength(50, ErrorMessage = "There are too many characters in this field.")]
-        [Display(Name = "Customer Last Name")]
-        public string LastName { get; set; }
-
+        [Display(Name = "Product ID")]
         public int ProductID { get; set; }
 
-        public int PaymentID { get; set; }
-
+        [Display(Name = "Item #")]
         public int ItemCount { get; set; }
     }
 }

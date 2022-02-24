@@ -18,7 +18,7 @@ namespace SkateShop.Models.Payment
         [Display(Name = "Card Holder Name")]
         public string CardHolderName { get; set; }
         
-        [Display(Name = "Card Number")]
+        [Display(Name = "Card #")]
         public int CardNumber { get; set; }
 
         [Display(Name = "Card Expiration Month")]

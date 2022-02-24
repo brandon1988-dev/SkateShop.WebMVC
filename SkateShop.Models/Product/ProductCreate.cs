@@ -16,7 +16,7 @@ namespace SkateShop.Models
         public string ProductName { get; set; }
 
         [Required]
-        [Display(Name = "Number of Product")]
+        [Display(Name = "Available Stock")]
         public int AvailableStock { get; set; }
 
         [Required]

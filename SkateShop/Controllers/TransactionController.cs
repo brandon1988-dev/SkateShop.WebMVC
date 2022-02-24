@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using Microsoft.AspNet.Identity;
+using SkateShop.Models.Transaction;
+using SkateShop.Services;
+using System;
 using System.Web.Mvc;
 
 namespace SkateShop.Controllers
@@ -11,79 +11,91 @@ namespace SkateShop.Controllers
         // GET: Transaction
         public ActionResult Index()
         {
-            return View();
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            var service = new TransactionService(userId);
+            var model = service.GetTransactions();
+
+            return View(model);
         }
 
-        // GET: Transaction/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: Transaction/Create
+        // GET: Create Transaction
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Transaction/Create
+        // POST: Publish Customer to DB
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(TransactionCreate model)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                // TODO: Add insert logic here
+                return View(model);
+            }
 
-                return RedirectToAction("Index");
-            }
-            catch
+            var service = CreateTransactionService();
+
+            if (service.TransactionCreate(model))
             {
-                return View();
-            }
+                TempData["SaveResult"] = "Your transaction was created.";
+                return RedirectToAction("Index");
+            };
+
+            ModelState.AddModelError("", "Transaction could not be created.");
+            return View(model);
         }
 
-        // GET: Transaction/Edit/5
+        private TransactionService CreateTransactionService()
+        {
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            var service = new TransactionService(userId);
+            return service;
+        }
+
+        public ActionResult Details(int id)
+        {
+            var svc = CreateTransactionService();
+            var model = svc.GetTransactionByID(id);
+
+            return View(model);
+        }
+
         public ActionResult Edit(int id)
         {
-            return View();
+            var service = CreateTransactionService();
+            var detail = service.GetTransactionByID(id);
+            var model =
+                new TransactionEdit
+                {
+                    ProductID = detail.ProductID,
+                    ItemCount = detail.ItemCount,
+                };
+            return View(model);
         }
 
-        // POST: Transaction/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, TransactionEdit model)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                // TODO: Add update logic here
+                return View(model);
+            }
+            if (model.ID != id)
+            {
+                ModelState.AddModelError("", "ID Mismatch");
+                return View(model);
+            }
+            var service = CreateTransactionService();
 
+            if (service.UpdateTransaction(model))
+            {
+                TempData["Save Result"] = "Your transaction was updated.";
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Transaction/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Transaction/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            ModelState.AddModelError("", "Your transaction could not be updated.");
+            return View(model);
         }
     }
 }

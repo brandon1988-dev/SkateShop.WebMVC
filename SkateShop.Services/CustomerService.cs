@@ -70,7 +70,7 @@ namespace SkateShop.Services
                         CustomerID = entity.CustomerID,
                         FirstName = entity.FirstName,
                         LastName = entity.LastName,
-                        PaymentType = entity.Payment
+                        PaymentType = entity.Payment,
                     };
             }
         }

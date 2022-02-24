@@ -11,10 +11,10 @@ namespace SkateShop.Models
     public class PaymentListItem
     {
         [ForeignKey(nameof(Customer))]
-        [Display(Name = "Customer ID")]
+        [Display(Name = "Customer #")]
         public int CustomerID { get; set; }
 
-        [Display(Name = "Payment ID")]
+        [Display(Name = "Payment #")]
         public int PaymentID { get; set; }
     }
 }

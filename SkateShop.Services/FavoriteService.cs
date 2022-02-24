@@ -23,8 +23,7 @@ namespace SkateShop.Services
                 CustomerID =model.CustomerID,
                 FavoriteID = model.FavoriteID,
                 FavoriteName = model.FavoriteName,
-                ProductID = model.ProductID,
-                ProductName = model.ProductName,
+                ProductID = model.ProductID
             };
             using (var ctx = new ApplicationDbContext())
             {
@@ -67,7 +66,6 @@ namespace SkateShop.Services
                     {
                         FavoriteID = entity.FavoriteID,
                         ProductID = entity.ProductID,
-                        ProductName = entity.ProductName
                     };
             }
         }
@@ -85,8 +83,6 @@ namespace SkateShop.Services
                     return false;
                 }
                 entity.ProductID = model.ProductID;
-                entity.ProductName = model.ProductName;
-                entity.FavoriteID = model.FavoriteID;
 
                 return ctx.SaveChanges() == 1;
             }

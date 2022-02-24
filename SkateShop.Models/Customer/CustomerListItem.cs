@@ -10,7 +10,7 @@ namespace SkateShop.Models.Customer
 {
     public class CustomerListItem
     {
-        [Display(Name = "Customer ID")]
+        [Display(Name = "Customer #")]
         public int CustomerID { get; set; }
 
         [Display(Name = "Customer First Name")]

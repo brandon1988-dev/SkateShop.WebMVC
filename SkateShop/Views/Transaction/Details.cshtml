@@ -1,0 +1,50 @@
+﻿@model SkateShop.Models.Transaction.TransactionDetail
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>TransactionDetail</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ItemCount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ItemCount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PaymentAmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PaymentAmount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedUtc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedUtc)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

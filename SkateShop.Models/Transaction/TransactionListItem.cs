@@ -10,25 +10,20 @@ namespace SkateShop.Models.Transaction
 {
     public class TransactionListItem
     {
-        [Display(Name = "Transaction ID")]
-        public int TransactionID { get; set; }
+        [Display(Name = "Transaction #")]
+        public int ID { get; set; }
 
-        [Display(Name = "Item Count")]
+        [Display(Name = "Items Purchased")]
         public int ItemCount { get; set; }
 
-        [Display(Name = "Customer Last Name")]
-        public string LastName { get; set; }
+        [Display(Name = "Customer Name")]
+        public string CustomerName { get; set; }
 
         [Display(Name = "Name of Product")]
         public string ProductName { get; set; }
 
-        [Display(Name = "Amount Paid")]
-        public double? PaymentAmount { get; set; }
-
-        [Display(Name = "Method of Payment")]
-        public PaymentMethod PaymentType { get; set; }
-
         [Display(Name = "Created")]
         public DateTimeOffset CreatedUtc { get; set; }
+
     }
 }

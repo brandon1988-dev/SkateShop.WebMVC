@@ -11,37 +11,32 @@ namespace SkateShop.Data
     public class Transaction
     {
         [Key]
-        public int TransactionID { get; set; }
+        public int ID { get; set; }
+
+        [Required]
+        [ForeignKey(nameof(Customer))]
+        public int CustomerID { get; set; }
 
         [Required]
         [ForeignKey(nameof(Product))]
         public int ProductID { get; set; }
 
         [Required]
-        [ForeignKey(nameof(Customer))]
-        public int CustomerID { get; set; }
-        public string ProductName { get; set; }
+        public int ItemCount { get; set; }
 
         [Required]
         [ForeignKey(nameof(Payment))]
         public int PaymentID { get; set; }
 
         [Required]
-        public int ItemCount { get; set; }
-
-        [Required]
         public double? PaymentAmount { get; set; }
-
-        [Required]
-        public PaymentMethod PaymentType { get; set; }
-
-        [Required]
-        public string LastName { get; set; }
 
         [Required]
         public DateTime DateOfTransaction { get; set; }
 
         public virtual Customer Customer { get; set; }
         public virtual Product Product { get; set; }
+
+        public virtual PaymentMethod Payment { get; set; }
     }
 }

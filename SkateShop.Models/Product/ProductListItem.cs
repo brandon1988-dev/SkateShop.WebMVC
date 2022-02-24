@@ -9,16 +9,14 @@ namespace SkateShop.Models
 {
     public class ProductListItem
     {
-        [Display(Name = "Product ID")]
+        [Display(Name = "Product #")]
         public int ProductID { get; set; }
 
         [Display(Name = "Product Name")]
         public string ProductName { get; set; }
 
-        [Display(Name = "Products Available")]
+        [Display(Name = "Available Stock")]
         public int AvailableStock { get; set; }
-
-        [Display(Name ="Price")]
         public decimal Price { get; set; }
 
         [Display(Name = "Created")]

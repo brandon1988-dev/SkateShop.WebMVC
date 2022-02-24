@@ -9,14 +9,11 @@ namespace SkateShop.Models.Favorite
 {
     public class FavoriteDetail
     {
-        [Display(Name = "Favorite ID")]
+        [Display(Name = "Favorites #")]
         public int FavoriteID { get; set; }
 
-
-        [Display(Name = "Favorite Product ID")]
+        [Display(Name = "Favorites Product #")]
         public int ProductID { get; set; }
 
-        [Display(Name = "Favorite Product Name")]
-        public string ProductName { get; set; }
     }
 }

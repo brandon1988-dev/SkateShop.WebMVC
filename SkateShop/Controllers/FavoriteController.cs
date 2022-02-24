@@ -72,9 +72,7 @@ namespace SkateShop.Controllers
             var model =
                 new FavoriteEdit
                 {
-                    FavoriteID = detail.FavoriteID,
                     ProductID = detail.ProductID,
-                    ProductName = detail.ProductName,
                 };
             return View(model);
         }

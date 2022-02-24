@@ -12,7 +12,7 @@ namespace SkateShop.Models.Customer
 {
     public class CustomerDetail
     {
-        [Display(Name = "Customer ID")]
+        [Display(Name = "Customer #")]
         public int CustomerID { get; set; }
 
         [Display(Name = "Customer First Name")]
@@ -27,6 +27,7 @@ namespace SkateShop.Models.Customer
         [Display(Name = "Favorites")]
         public  List<FavoriteListItem> Favorites { get; set; }
 
+        [Display(Name = "Favorites Name")]
         public int FavoriteID { get; set; }
     }
 }

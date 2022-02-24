@@ -23,7 +23,9 @@ namespace SkateShop.Models.Customer
         public string LastName { get; set; }
 
         [Required]
+        [Display(Name = "Payment Method")]
         public PaymentMethod PaymentType { get; set; }
+
 
     }
 }

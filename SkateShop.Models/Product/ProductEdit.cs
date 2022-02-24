@@ -9,6 +9,7 @@ namespace SkateShop.Models
 {
     public class ProductEdit
     {
+        [Display(Name = "Product #")]
         public int ProductID { get; set; }
 
         [MinLength(2, ErrorMessage = "Please enter at least 2 characters.")]
@@ -16,7 +17,7 @@ namespace SkateShop.Models
         [Display(Name = "Product Name")]
         public string ProductName { get; set; }
 
-        [Display(Name = "Number of Product")]
+        [Display(Name = "Available Stock")]
         public int AvailableStock { get; set; }
 
         public decimal Price { get; set; }
