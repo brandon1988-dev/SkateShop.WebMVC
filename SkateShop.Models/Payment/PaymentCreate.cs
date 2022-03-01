@@ -15,11 +15,12 @@ namespace SkateShop.Models
         public int PaymentID { get; set; }
 
         [Required]
-        public PaymentMethod PaymentType { get; set; }
+        public PaymentMethod PaymentType { get; set; } = PaymentMethod.Cash;
 
-        [Required]
+        public string CustomerName { get; set; }
+
         [MinLength(2, ErrorMessage = "Please enter at least 2 characters.")]
-        [MaxLength(20, ErrorMessage = "There are too many characters in this field.")]
+        [MaxLength(50, ErrorMessage = "There are too many characters in this field.")]
         [Display(Name = "Card Holder Name")]
         public string CardHolderName { get; set; }
 
@@ -27,15 +28,13 @@ namespace SkateShop.Models
         [Display(Name = "Billing Address")]
         public string BillingAddress { get; set; }
 
-        [Required]
         [Display(Name = "Card #")]
         public int CardNumber { get; set; }
 
-        [Required]
+        
         [Display(Name = "Expiration Month")]
         public int ExpirationMonth { get; set; }
 
-        [Required]
         [Display(Name = "Expiration Year")]
         public int ExpirationYear { get; set; }
 

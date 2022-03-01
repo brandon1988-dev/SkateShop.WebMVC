@@ -93,6 +93,14 @@
     <Compile Include="Migrations\202202241824328_transactionmodelfix.Designer.cs">
       <DependentUpon>202202241824328_transactionmodelfix.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202202281423559_paymentfix.cs" />
+    <Compile Include="Migrations\202202281423559_paymentfix.Designer.cs">
+      <DependentUpon>202202281423559_paymentfix.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202202281651111_paymentfix2.cs" />
+    <Compile Include="Migrations\202202281651111_paymentfix2.Designer.cs">
+      <DependentUpon>202202281651111_paymentfix2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Payment.cs" />
     <Compile Include="Product.cs" />
@@ -130,6 +138,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202202241824328_transactionmodelfix.resx">
       <DependentUpon>202202241824328_transactionmodelfix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202202281423559_paymentfix.resx">
+      <DependentUpon>202202281423559_paymentfix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202202281651111_paymentfix2.resx">
+      <DependentUpon>202202281651111_paymentfix2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

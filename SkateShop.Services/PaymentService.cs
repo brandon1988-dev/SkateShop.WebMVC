@@ -19,16 +19,29 @@ namespace SkateShop.Services
 
         public bool PaymentCreate(PaymentCreate model)
         {
-            Payment payment =  new Payment()
-            {
-                PaymentType = model.PaymentType,
-                BillingAddress = model.BillingAddress,
-                CreatedUtc = DateTimeOffset.Now,
-                OwnerID = _userId,
-            };
             using (var ctx = new ApplicationDbContext())
             {
-                ctx.Payments.Add(payment);
+                var pay = new Payment();
+                if (model.PaymentType == PaymentMethod.Visa ||
+                    model.PaymentType == PaymentMethod.Discover ||
+                    model.PaymentType == PaymentMethod.Mastercard ||
+                    model.PaymentType == PaymentMethod.AmericanExpress)
+                {
+                    CreditCard creditCard = new CreditCard();
+                    creditCard.PaymentID = model.PaymentID;
+                    creditCard.BillingAddress = model.BillingAddress;
+                    creditCard.CardHolderName = model.CardHolderName;
+                    creditCard.CardNumber = model.CardNumber;
+                    creditCard.ExpirationMonth = model.ExpirationMonth;
+                    creditCard.ExpirationYear = model.ExpirationYear;
+                    creditCard.PaymentType = model.PaymentType;
+                }
+                else if (model.PaymentType == PaymentMethod.PayPal)
+                {
+                    Paypal paypal = new Paypal();
+                    paypal.UserEmail = model.UserEmail;
+                }
+                ctx.Payments.Add(pay);
                 return ctx.SaveChanges() == 1;
             }
         }
@@ -62,14 +75,46 @@ namespace SkateShop.Services
                 {
                     return null;
                 }
-                return
-                    new PaymentDetail
-                    {
-                        PaymentID = entity.PaymentID,
-                        PaymentType = entity.PaymentType,
-                        CreatedUtc = entity.CreatedUtc
-                    };
-            }
+                else if (entity.PaymentType == PaymentMethod.Visa || 
+                         entity.PaymentType == PaymentMethod.AmericanExpress ||
+                         entity.PaymentType == PaymentMethod.Discover ||
+                         entity.PaymentType == PaymentMethod.Mastercard)
+                {
+                    CreditCard creditCard = (CreditCard)entity;
+                    return
+                        new PaymentDetail
+                        {
+                            PaymentID = entity.PaymentID,
+                            PaymentType = entity.PaymentType,
+                            CreatedUtc = DateTime.Now,
+                            BillingAddress = entity.BillingAddress,
+                            CardHolderName = creditCard.CardHolderName,
+                            CardNumber = creditCard.CardNumber,
+                        };
+                }
+
+                else if (entity.PaymentType == PaymentMethod.PayPal)
+                {
+                    Paypal paypal = (Paypal)entity;
+                    return
+                        new PaymentDetail
+                        {
+                            PaymentID = entity.PaymentID,
+                            UserEmail = paypal.UserEmail,
+                            PaymentType = entity.PaymentType,
+                            BillingAddress = entity.BillingAddress,
+                            CreatedUtc = DateTimeOffset.UtcNow
+                        };
+                }
+                    return
+                        new PaymentDetail
+                        {
+                            PaymentID = entity.PaymentID,
+                            PaymentType = entity.PaymentType,
+                            BillingAddress = entity.BillingAddress,
+                            CreatedUtc = DateTimeOffset.UtcNow
+                        };
+                }
         }
         public bool UpdatePayment(PaymentEdit model)
         {
@@ -79,7 +124,11 @@ namespace SkateShop.Services
                     ctx
                         .Payments
                         .SingleOrDefault(e => e.PaymentID == model.PaymentID);
-                if (entity is CreditCard creditCard)
+                if (entity == null)
+                {
+                    return false;
+                }
+                else if (entity is CreditCard creditCard)
                 {
                     creditCard.PaymentID = model.PaymentID;
                     creditCard.BillingAddress = model.BillingAddress;

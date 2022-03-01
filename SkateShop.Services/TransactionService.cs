@@ -19,15 +19,14 @@ namespace SkateShop.Services
 
         public bool TransactionCreate(TransactionCreate model)
         {
-            
-            var entity = new Transaction()
+           var entity = new Transaction()
             {
                 CustomerID = model.CustomerID,
                 ProductID = model.ProductID,
                 ItemCount = model.ItemCount,
                 DateOfTransaction = DateTime.Now,
                 PaymentID = model.PaymentID,
-                PaymentAmount = model.PaymentAmount
+                PaymentAmount = model.PaymentAmount,
             };
             using (var ctx = new ApplicationDbContext())
             {

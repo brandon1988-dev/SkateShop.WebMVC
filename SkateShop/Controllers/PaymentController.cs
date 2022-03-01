@@ -14,6 +14,7 @@ namespace SkateShop.Controllers
     [Authorize]
     public class PaymentController : Controller
     {
+
         // GET: Payment
         public ActionResult Index()
         {
@@ -27,7 +28,8 @@ namespace SkateShop.Controllers
         // GET: Create Payment
         public ActionResult Create()
         {
-            return View();
+            PaymentCreate paymentCreate = new PaymentCreate();
+            return View(paymentCreate);
         }
 
         // POST: Publish Payment to DB

@@ -71,8 +71,7 @@ namespace SkateShop.Services
                         ProductName = entity.ProductName,
                         AvailableStock = entity.AvailableStock,
                         Price = entity.Price,
-                        CreatedUtc = entity.CreatedUtc,
-                        ModifiedUtc = entity.ModifiedUtc
+                        CreatedUtc = DateTime.UtcNow,
                     };
             }
         }

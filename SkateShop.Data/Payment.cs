@@ -30,6 +30,8 @@ namespace SkateShop.Data
         public Guid OwnerID { get; set; }
 
         public DateTimeOffset CreatedUtc { get; set; }
+        public virtual Customer Customer { get; set; }
+
 
     }
 
