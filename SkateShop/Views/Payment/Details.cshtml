@@ -10,12 +10,8 @@
     <h4>PaymentDetail</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.OwnerID)
-        </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.OwnerID)
+            @Html.HiddenFor(model => model.OwnerID)
         </dd>
 
         <dt>

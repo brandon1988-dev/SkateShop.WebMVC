@@ -7,13 +7,13 @@ namespace SkateShop.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.0-30225")]
-    public sealed partial class fixed_payment_db : IMigrationMetadata
+    public sealed partial class fixed_paymentdb : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(fixed_payment_db));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(fixed_paymentdb));
         
         string IMigrationMetadata.Id
         {
-            get { return "202203022016389_fixed_payment_db"; }
+            get { return "202203022128502_fixed_paymentdb"; }
         }
         
         string IMigrationMetadata.Source

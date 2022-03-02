@@ -113,9 +113,9 @@
     <Compile Include="Migrations\202203021959144_fixed_datetime.Designer.cs">
       <DependentUpon>202203021959144_fixed_datetime.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202203022016389_fixed_payment_db.cs" />
-    <Compile Include="Migrations\202203022016389_fixed_payment_db.Designer.cs">
-      <DependentUpon>202203022016389_fixed_payment_db.cs</DependentUpon>
+    <Compile Include="Migrations\202203022128502_fixed_paymentdb.cs" />
+    <Compile Include="Migrations\202203022128502_fixed_paymentdb.Designer.cs">
+      <DependentUpon>202203022128502_fixed_paymentdb.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Payment.cs" />
@@ -170,8 +170,8 @@
     <EmbeddedResource Include="Migrations\202203021959144_fixed_datetime.resx">
       <DependentUpon>202203021959144_fixed_datetime.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202203022016389_fixed_payment_db.resx">
-      <DependentUpon>202203022016389_fixed_payment_db.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202203022128502_fixed_paymentdb.resx">
+      <DependentUpon>202203022128502_fixed_paymentdb.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

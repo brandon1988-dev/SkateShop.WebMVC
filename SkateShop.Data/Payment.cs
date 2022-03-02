@@ -29,11 +29,10 @@ namespace SkateShop.Data
         [Required]
         public Guid OwnerID { get; set; }
 
-        [Required]
-        public string UserEmail { get; set; }
-
         public DateTime? CreatedUtc { get; set; }
         public virtual Customer Customer { get; set; }
+
+        public string UserEmail { get; set; }
 
 
     }
@@ -52,13 +51,11 @@ namespace SkateShop.Data
         [Required]
         public int ExpirationYear { get; set; }
 
-        [Required]
-        public string UserEmail { get; set; }
+
     }
 
     public class Paypal : Payment
     {
-        [Required]
-        public string UserEmail { get; set; }
+
     }
 }

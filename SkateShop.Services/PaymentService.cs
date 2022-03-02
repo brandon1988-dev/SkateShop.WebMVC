@@ -36,23 +36,28 @@ namespace SkateShop.Services
                     creditCard.ExpirationMonth = model.ExpirationMonth;
                     creditCard.ExpirationYear = model.ExpirationYear;
                     creditCard.PaymentType = model.PaymentType;
-                    creditCard.UserEmail = model.UserEmail;
+                    creditCard.OwnerID = _userId; 
 
-                       entity = creditCard;
+                    entity = creditCard;
 
                 }
                 else if (model.PaymentType == PaymentMethod.PayPal)
                 {
                     Paypal paypal = new Paypal();
                     paypal.UserEmail = model.UserEmail;
+                    paypal.OwnerID = _userId;
+
                     using (var ctx = new ApplicationDbContext())
 
-                        entity = paypal;
+                    entity = paypal;
                 }
                         entity.PaymentID = model.PaymentID;
                         entity.PaymentType = model.PaymentType;
-                        entity.BillingAddress = entity.BillingAddress;
+                        entity.BillingAddress = model.BillingAddress;
+                        entity.UserEmail = model.UserEmail;
                         entity.CreatedUtc = DateTime.Now;
+                        entity.OwnerID = _userId;
+
                 using (var ctx = new ApplicationDbContext())
                 {
                     ctx.Payments.Add(entity);
