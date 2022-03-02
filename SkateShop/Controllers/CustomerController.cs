@@ -80,7 +80,6 @@ namespace SkateShop.Controllers
                     FirstName = detail.FirstName,
                     LastName = detail.LastName,
                     PaymentType = detail.PaymentType,
-                    FavoriteID = detail.FavoriteID
                 };
             return View(model);
         }

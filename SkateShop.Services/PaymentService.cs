@@ -19,30 +19,45 @@ namespace SkateShop.Services
 
         public bool PaymentCreate(PaymentCreate model)
         {
-            using (var ctx = new ApplicationDbContext())
             {
-                var pay = new Payment();
-                if (model.PaymentType == PaymentMethod.Visa ||
+                var entity = new Payment();
+                if (
+                    model.PaymentType == PaymentMethod.Visa ||
                     model.PaymentType == PaymentMethod.Discover ||
                     model.PaymentType == PaymentMethod.Mastercard ||
                     model.PaymentType == PaymentMethod.AmericanExpress)
                 {
+
                     CreditCard creditCard = new CreditCard();
-                    creditCard.PaymentID = model.PaymentID;
+
                     creditCard.BillingAddress = model.BillingAddress;
                     creditCard.CardHolderName = model.CardHolderName;
                     creditCard.CardNumber = model.CardNumber;
                     creditCard.ExpirationMonth = model.ExpirationMonth;
                     creditCard.ExpirationYear = model.ExpirationYear;
                     creditCard.PaymentType = model.PaymentType;
+                    creditCard.UserEmail = model.UserEmail;
+
+                       entity = creditCard;
+
                 }
                 else if (model.PaymentType == PaymentMethod.PayPal)
                 {
                     Paypal paypal = new Paypal();
                     paypal.UserEmail = model.UserEmail;
+                    using (var ctx = new ApplicationDbContext())
+
+                        entity = paypal;
                 }
-                ctx.Payments.Add(pay);
-                return ctx.SaveChanges() == 1;
+                        entity.PaymentID = model.PaymentID;
+                        entity.PaymentType = model.PaymentType;
+                        entity.BillingAddress = entity.BillingAddress;
+                        entity.CreatedUtc = DateTime.Now;
+                using (var ctx = new ApplicationDbContext())
+                {
+                    ctx.Payments.Add(entity);
+                    return ctx.SaveChanges() == 1;
+                }
             }
         }
 
@@ -57,7 +72,7 @@ namespace SkateShop.Services
                         e =>
                             new PaymentListItem
                             {
-                                PaymentID = e.PaymentID,
+                                PaymentID = e.PaymentID
                             }
                    );
                 return query.ToArray();
@@ -90,6 +105,9 @@ namespace SkateShop.Services
                             BillingAddress = entity.BillingAddress,
                             CardHolderName = creditCard.CardHolderName,
                             CardNumber = creditCard.CardNumber,
+                            ExpirationMonth = creditCard.ExpirationMonth,
+                            ExpirationYear = creditCard.ExpirationYear,
+                            UserEmail = creditCard.UserEmail
                         };
                 }
 
@@ -103,7 +121,7 @@ namespace SkateShop.Services
                             UserEmail = paypal.UserEmail,
                             PaymentType = entity.PaymentType,
                             BillingAddress = entity.BillingAddress,
-                            CreatedUtc = DateTimeOffset.UtcNow
+                            CreatedUtc = DateTime.Now
                         };
                 }
                     return
@@ -112,7 +130,9 @@ namespace SkateShop.Services
                             PaymentID = entity.PaymentID,
                             PaymentType = entity.PaymentType,
                             BillingAddress = entity.BillingAddress,
-                            CreatedUtc = DateTimeOffset.UtcNow
+                            CreatedUtc = DateTime.Now,
+                            UserEmail = entity.UserEmail,
+
                         };
                 }
         }

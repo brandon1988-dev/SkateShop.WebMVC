@@ -11,7 +11,6 @@ namespace SkateShop.Models
 {
     public class PaymentCreate
     {
-        [Required]
         public int PaymentID { get; set; }
 
         [Required]
@@ -19,8 +18,7 @@ namespace SkateShop.Models
 
         public string CustomerName { get; set; }
 
-        [MinLength(2, ErrorMessage = "Please enter at least 2 characters.")]
-        [MaxLength(50, ErrorMessage = "There are too many characters in this field.")]
+       
         [Display(Name = "Card Holder Name")]
         public string CardHolderName { get; set; }
 

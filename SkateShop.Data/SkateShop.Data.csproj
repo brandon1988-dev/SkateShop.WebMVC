@@ -101,6 +101,22 @@
     <Compile Include="Migrations\202202281651111_paymentfix2.Designer.cs">
       <DependentUpon>202202281651111_paymentfix2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202203021807512_transactionfix.cs" />
+    <Compile Include="Migrations\202203021807512_transactionfix.Designer.cs">
+      <DependentUpon>202203021807512_transactionfix.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202203021950390_fixedissues.cs" />
+    <Compile Include="Migrations\202203021950390_fixedissues.Designer.cs">
+      <DependentUpon>202203021950390_fixedissues.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202203021959144_fixed_datetime.cs" />
+    <Compile Include="Migrations\202203021959144_fixed_datetime.Designer.cs">
+      <DependentUpon>202203021959144_fixed_datetime.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202203022016389_fixed_payment_db.cs" />
+    <Compile Include="Migrations\202203022016389_fixed_payment_db.Designer.cs">
+      <DependentUpon>202203022016389_fixed_payment_db.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Payment.cs" />
     <Compile Include="Product.cs" />
@@ -144,6 +160,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202202281651111_paymentfix2.resx">
       <DependentUpon>202202281651111_paymentfix2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202203021807512_transactionfix.resx">
+      <DependentUpon>202203021807512_transactionfix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202203021950390_fixedissues.resx">
+      <DependentUpon>202203021950390_fixedissues.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202203021959144_fixed_datetime.resx">
+      <DependentUpon>202203021959144_fixed_datetime.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202203022016389_fixed_payment_db.resx">
+      <DependentUpon>202203022016389_fixed_payment_db.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

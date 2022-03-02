@@ -14,7 +14,6 @@
     <h4>PaymentCreate</h4>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
     <div class="form-group">
         @Html.LabelFor(model => model.PaymentType, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
@@ -22,6 +21,8 @@
             @Html.ValidationMessageFor(model => model.PaymentType, "", new { @class = "text-danger" })
         </div>
     </div>
+
+
     <div class="form-group">
         @Html.LabelFor(model => model.CustomerName, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">

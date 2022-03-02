@@ -32,7 +32,7 @@ namespace SkateShop.Data
         public double? PaymentAmount { get; set; }
 
         [Required]
-        public DateTime DateOfTransaction { get; set; }
+        public DateTime? DateOfTransaction { get; set; }
 
         public virtual Customer Customer { get; set; }
         public virtual Product Product { get; set; }

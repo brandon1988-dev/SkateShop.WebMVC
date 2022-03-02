@@ -12,9 +12,6 @@ namespace SkateShop.Models.Customer
     {
         public int CustomerID { get; set; }
 
-        [Display(Name = "Favorite ID")]
-        public int FavoriteID { get; set; }
-
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
 
