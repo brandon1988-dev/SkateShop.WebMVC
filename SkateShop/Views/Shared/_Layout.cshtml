@@ -24,6 +24,7 @@
                 <li>@Html.ActionLink("Home", "Index", "Home")</li>
                 @if (User.Identity.IsAuthenticated)
                 {
+                    <li>@Html.ActionLink("Products", "Index", "Product")</li>
                     <li>@Html.ActionLink("Customers", "Index", "Customer")</li>
                     <li>@Html.ActionLink("Transactions", "Index", "Transaction")</li>
                     <li>@Html.ActionLink("Payments", "Index", "Payment")</li>
@@ -31,7 +32,7 @@
                 <li>@Html.ActionLink("About", "About", "Home")</li>
                 <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                 <div class="nav justify-content-end">
-                 <li>@Html.Partial("_LoginPartial")</li>
+                <li>@Html.Partial("_LoginPartial")</li>
             </ul>
         </div>
     </div>
